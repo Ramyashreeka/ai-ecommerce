@@ -5,6 +5,7 @@ import com.example.smart_ecommerce.entity.Product;
 import com.example.smart_ecommerce.repository.ProductRepository;
 import com.example.smart_ecommerce.dto.ProductRequest;
 import com.example.smart_ecommerce.dto.ProductResponse;
+import com.example.smart_ecommerce.exception.ProductNotFoundException;
 
 import java.util.Optional;
 
@@ -52,23 +53,28 @@ public class ProductService {
 		return responses;
 	}
 	
-	public Product updateProduct(Long id, Product updatedProduct) {
+	public Product updateProduct(Long id, ProductRequest request) {
 		Optional<Product> existingProduct = productRepository.findById(id);
 		
 		if(existingProduct.isPresent()) {
 			Product product = existingProduct.get();//gets the existing product
-			product.setName(updatedProduct.getName());//updating existing product details
-			product.setPrice(updatedProduct.getPrice());
-			product.setDescription(updatedProduct.getDescription());
-			product.setStock(updatedProduct.getStock());
+			product.setName(request.getName());//updating existing product details
+			product.setPrice(request.getPrice());
+			product.setDescription(request.getDescription());
+			product.setStock(request.getStock());
 			
 			return productRepository.save(product);//storing changes to mysql
 			
 		}
-		return null;
+		throw new ProductNotFoundException("Product not found with id: " +id);
 	}
 	
 	public void deleteProduct(Long id) {
-		productRepository.deleteById(id);
+		Optional<Product> existingProduct = productRepository.findById(id);
+		if(existingProduct.isPresent()) {
+			productRepository.deleteById(id);
+			return;
+		}
+		throw new ProductNotFoundException("Product not found with id: " +id);
 	}
 }

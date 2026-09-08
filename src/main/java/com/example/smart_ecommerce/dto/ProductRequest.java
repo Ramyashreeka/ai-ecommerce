@@ -1,9 +1,14 @@
 package com.example.smart_ecommerce.dto;
 
+import jakarta.validation.constraints.*;
+
 public class ProductRequest {
+	@NotBlank(message = "Product name is required")
 	private String name;
+	@Positive(message = "Price must be greater than 0")
 	private double price;
 	private String description;
+	@PositiveOrZero(message = "Stock cannot be negative")
 	private int stock;
 	public String getName() {
 		return name;

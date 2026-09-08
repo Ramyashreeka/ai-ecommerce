@@ -6,6 +6,7 @@ import com.example.smart_ecommerce.entity.Product;
 import com.example.smart_ecommerce.service.ProductService;
 import com.example.smart_ecommerce.dto.ProductRequest;
 import com.example.smart_ecommerce.dto.ProductResponse;
+import jakarta.validation.Valid;
 
 
 
@@ -24,13 +25,13 @@ public class ProductController {
 	}
 	
 	@PostMapping("/products")
-	public ProductResponse saveProduct(@RequestBody ProductRequest request) {
+	public ProductResponse saveProduct(@Valid @RequestBody ProductRequest request) {
 		return productService.saveProduct(request);
 	}
 	
 	@PutMapping("/products/{id}")
-	public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
-		return productService.updateProduct(id, product);
+	public Product updateProduct(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
+		return productService.updateProduct(id, request);
 	}
 	
 	@DeleteMapping("/products/{id}")
