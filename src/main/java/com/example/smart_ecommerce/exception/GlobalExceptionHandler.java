@@ -19,4 +19,9 @@ public class GlobalExceptionHandler {
 		return new ErrorResponse(404, ex.getMessage(), java.time.LocalDateTime.now().toString());
 	}
 	
+	@ExceptionHandler(CategoryNotFoundException.class)
+	public ErrorResponse handleCategoryNotFoundException(CategoryNotFoundException ex) {
+		return new ErrorResponse(404, ex.getMessage(), java.time.LocalDateTime.now().toString());
+	}
+	
 }
