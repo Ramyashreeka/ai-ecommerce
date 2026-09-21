@@ -2,10 +2,15 @@ package com.example.smart_ecommerce.service;
 
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import com.example.smart_ecommerce.entity.Category;
 import com.example.smart_ecommerce.entity.Product;
+import com.example.smart_ecommerce.repository.CategoryRepository;
 import com.example.smart_ecommerce.repository.ProductRepository;
+import com.example.smart_ecommerce.dto.CategoryResponse;
 import com.example.smart_ecommerce.dto.ProductRequest;
 import com.example.smart_ecommerce.dto.ProductResponse;
+import com.example.smart_ecommerce.exception.CategoryNotFoundException;
 import com.example.smart_ecommerce.exception.ProductNotFoundException;
 import org.springframework.data.domain.*;
 
@@ -18,15 +23,22 @@ public class ProductService {
 	
 	private ProductRepository productRepository;
 	
-	public ProductService(ProductRepository productRepository) {
+	private CategoryRepository categoryRepository;
+	
+	public ProductService(ProductRepository productRepository, CategoryRepository categoryRepository) {
 		this.productRepository=productRepository;
+		this.categoryRepository=categoryRepository;
 	}
 	public ProductResponse saveProduct(ProductRequest request) {
+		Category category = categoryRepository.findById(request.getCategoryId())
+				.orElseThrow(() -> new CategoryNotFoundException(
+						"Category not found with id: " +request.getCategoryId()));
 		Product product = new Product(null,
 									request.getName(),
 									request.getPrice(),
 									request.getDescription(),
-									request.getStock()
+									request.getStock(),
+									category
 									);
 											
 		Product savedProduct = productRepository.save(product);
@@ -131,6 +143,15 @@ public class ProductService {
 		response.setPrice(product.getPrice());
 		response.setDescription(product.getDescription());
 		response.setStock(product.getStock());
+		
+		if(product.getCategory() != null) {
+			
+			CategoryResponse categoryResponse = new CategoryResponse();
+			categoryResponse.setId(product.getCategory().getId());
+			categoryResponse.setName(product.getCategory().getName());
+			categoryResponse.setDescription(product.getCategory().getDescription());
+			response.setCategory(categoryResponse);
+		}
 		
 		
 		return response;//storing changes to mysql

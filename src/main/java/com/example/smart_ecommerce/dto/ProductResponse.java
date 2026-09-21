@@ -6,6 +6,8 @@ public class ProductResponse {
 	private double price;
 	private String description;
 	private int stock;
+	private CategoryResponse category;
+	
 	public Long getId() {
 		return id;
 	}
@@ -35,6 +37,13 @@ public class ProductResponse {
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	
+	public CategoryResponse getCategory() {
+		return category;
+	}
+	public void setCategory(CategoryResponse categoryResponse) {
+		this.category = categoryResponse;
 	}
 	
 	
