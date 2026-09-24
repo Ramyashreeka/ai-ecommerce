@@ -24,4 +24,14 @@ public class GlobalExceptionHandler {
 		return new ErrorResponse(404, ex.getMessage(), java.time.LocalDateTime.now().toString());
 	}
 	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ErrorResponse handleUserNotFoundException(UserNotFoundException ex) {
+		return new ErrorResponse(404, ex.getMessage(), java.time.LocalDateTime.now().toString());
+	}
+	
+	@ExceptionHandler(EmailAlreadyExistsException.class)
+	public ErrorResponse handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
+		return new ErrorResponse(404, ex.getMessage(), java.time.LocalDateTime.now().toString());
+	}
+	
 }

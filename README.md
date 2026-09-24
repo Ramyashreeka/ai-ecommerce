@@ -42,6 +42,18 @@ Product–Category Relationship
 - Product responses include category details when a category is assigned.
 - Products without an assigned category return "null" for the category.
 
+User Management
+
+- Create User
+- Get User by ID
+- Get All Users
+- Update User
+- Delete User
+- User input validation
+- Email uniqueness validation
+- Custom exception handling for user-related errors
+- Password excluded from User API responses
+
 API Testing
 
 The REST APIs are tested using Postman.
@@ -73,8 +85,5 @@ src
     └── resources
         └── application.properties
 
-Project Status
 
-The core Product and Category management functionality is currently implemented and tested.
 
-The project is being developed incrementally, with each major feature tested and committed to GitHub.
