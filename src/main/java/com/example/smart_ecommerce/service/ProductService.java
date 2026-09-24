@@ -109,6 +109,14 @@ public class ProductService {
 			product.setDescription(request.getDescription());
 			product.setStock(request.getStock());
 			
+
+			if(request.getCategoryId()!=null) {
+				Category category = categoryRepository.findById(request.getCategoryId())
+						.orElseThrow(()-> new CategoryNotFoundException("Category not found with id: "+request.getCategoryId()));
+				product.setCategory(category);
+			}
+			
+			
 			Product savedProduct = productRepository.save(product);
 			
 			ProductResponse response = new ProductResponse();
@@ -118,6 +126,15 @@ public class ProductService {
 			response.setPrice(savedProduct.getPrice());
 			response.setDescription(savedProduct.getDescription());
 			response.setStock(savedProduct.getStock());
+			
+			if(savedProduct.getCategory()!=null) {
+				CategoryResponse categoryResponse = new CategoryResponse();
+				categoryResponse.setId(savedProduct.getCategory().getId());
+				categoryResponse.setName(savedProduct.getCategory().getName());
+				
+				response.setCategory(categoryResponse);
+				
+			}
 			
 			
 			return response;//storing changes to mysql
