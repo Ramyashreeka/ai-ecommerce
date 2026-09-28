@@ -1,6 +1,8 @@
 package com.example.smart_ecommerce.exception;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.util.stream.Collectors;
 import com.example.smart_ecommerce.exception.*;
@@ -33,5 +35,23 @@ public class GlobalExceptionHandler {
 	public ErrorResponse handleEmailAlreadyExistsException(EmailAlreadyExistsException ex) {
 		return new ErrorResponse(404, ex.getMessage(), java.time.LocalDateTime.now().toString());
 	}
+	
+	@ExceptionHandler(CartAlreadyExistsException.class)
+	public ResponseEntity handleCartAlreadyExistsException(CartAlreadyExistsException ex) {
+		return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+	}
+	
+	@ExceptionHandler(CartNotFoundException.class)
+	public ResponseEntity handleCartNotFoundException(CartNotFoundException ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	}
+	
+	@ExceptionHandler(CartItemNotFoundException.class)
+	public ResponseEntity<String> handleCartItemNotFoundException(CartItemNotFoundException ex) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+	}
+	
+	
+	
 	
 }

@@ -54,6 +54,19 @@ User Management
 - Custom exception handling for user-related errors
 - Password excluded from User API responses
 
+# Cart Management
+- create a cart for a user
+- prevent duplicate carts for the same user
+- Get cart by ID
+- Get cart by user ID
+- Add products to cart
+- Get cart item by ID
+- Get cart items in a cart
+- Update cart item quantity
+- Remove cart items
+- Calculate cart total
+- Proper exception handling for invalid users, carts and cart items.
+
 API Testing
 
 The REST APIs are tested using Postman.
