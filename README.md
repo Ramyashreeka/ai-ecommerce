@@ -54,7 +54,7 @@ User Management
 - Custom exception handling for user-related errors
 - Password excluded from User API responses
 
-# Cart Management
+Cart Management
 - create a cart for a user
 - prevent duplicate carts for the same user
 - Get cart by ID
@@ -66,6 +66,25 @@ User Management
 - Remove cart items
 - Calculate cart total
 - Proper exception handling for invalid users, carts and cart items.
+
+# Order Management
+- Create orders from a user's cart
+- Get order by ID
+- Get all orders
+- Track and update order status
+- Create order items
+- Get order item by ID
+- Get all order items
+- Get order items by order ID
+- Update order item quantity
+- Remove order items
+- Store purchase-time product prices
+- Automatically synchronize order total when order items change
+- Checkout flow from cart to order
+- Automatically create order items during checkout
+- Automatically clear the cart after successful checkout
+- Validation for empty carts and invalid quantities
+- Proper exception handling for invalid users, orders, and order items
 
 API Testing
 

@@ -126,4 +126,9 @@ public class CartItemService {
 		return total;
 	}
 	
+	//clear the cart after checkout
+	public void clearCart(Long cartId) {
+		List<CartItem> cartItems = cartItemRepository.findByCart_Id(cartId);
+		cartItemRepository.deleteAll(cartItems);
+	}
 }
