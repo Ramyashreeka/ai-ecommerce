@@ -67,7 +67,7 @@ Cart Management
 - Calculate cart total
 - Proper exception handling for invalid users, carts and cart items.
 
-# Order Management
+ Order Management
 - Create orders from a user's cart
 - Get order by ID
 - Get all orders
@@ -85,6 +85,23 @@ Cart Management
 - Automatically clear the cart after successful checkout
 - Validation for empty carts and invalid quantities
 - Proper exception handling for invalid users, orders, and order items
+
+# Payment Management
+
+- Create simulated payments for orders
+- Prevent duplicate payments for an order
+- Derive payment amounts from order totals
+- Support payment methods such as UPI
+- Initialize payments with PENDING status
+- Update payment status to PENDING, SUCCESS, or FAILED
+- Retrieve payments by ID
+- Retrieve payments by order ID
+- Retrieve all payments
+- Validate payment methods and statuses
+- Handle missing payments and duplicate payment requests
+- Return appropriate HTTP error responses
+- Payment simulation only; real payment gateway integration planned for a later phase
+
 
 API Testing
 

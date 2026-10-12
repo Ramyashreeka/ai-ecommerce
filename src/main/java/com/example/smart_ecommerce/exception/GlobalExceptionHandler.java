@@ -66,7 +66,15 @@ public class GlobalExceptionHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
 	}
 	
+	@ExceptionHandler(PaymentAlreadyExistsException.class)
+	public ResponseEntity<String> handlePaymentAlreadyExistsException(PaymentAlreadyExistsException ex) {
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());
+	}
 	
+	@ExceptionHandler(PaymentNotFoundException.class)//for invalid payment id 
+	public ResponseEntity<String> handlePaymentNotFoundException(PaymentNotFoundException ex) {
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(ex.getMessage());//404 not found
+	}
 	
 	
 	
